@@ -1,0 +1,21 @@
+name: Update Index
+on:
+  workflow_dispatch:
+
+concurrency: ci-index-${{ github.ref }}
+
+permissions:
+  contents: write
+
+
+jobs:
+  update-index:
+    name: Update Index
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const script = require('./scripts/script.js')
+            console.log(script({github, context}))
