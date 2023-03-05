@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 module.exports = async ({github, fetch}) => {
     let response = await github.rest.repos.listForOrg({
         org: "pypi-data",

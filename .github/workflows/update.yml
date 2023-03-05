@@ -20,3 +20,12 @@ jobs:
           script: |
             const script = require('./scripts/script.js')
             console.log(await script({github, fetch}))
+      - uses: EndBug/add-and-commit@v9
+        with:
+          add: 'partitions/'
+          # From https://github.community/t/github-actions-bot-email-address/17204/5
+          author_email: "41898282+github-actions[bot]@users.noreply.github.com"
+          author_name: "commit-bot"
+          message: "Scheduled data update from Github Actions"
+          push: true
+          fetch: false
