@@ -18,11 +18,12 @@ module.exports = async ({github, fetch}) => {
         let content = await response.json();
         console.log(name);
         // console.log(content);
+        let count = Object.values(content.entries).reduce((a, v) => a + v.length, 0);
         let output = {
             url: content.url,
             earliest_release: content.earliest_release,
             latest_release: content.latest_release,
-            count: content.entries.length
+            count
         }
         console.log(output);
     }
