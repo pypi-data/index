@@ -20,7 +20,7 @@ module.exports = async ({github, fetch}) => {
             url: content.url,
             earliest_release: content.earliest_release,
             latest_release: content.latest_release,
-            count: content.entries.length;
+            count: content.entries.length
         }
         console.log(name);
         console.log(output);
