@@ -16,7 +16,13 @@ module.exports = async ({github, fetch}) => {
         });
         let response = await fetch(api_response.data.download_url);
         let content = await response.json();
+        let output = {
+            url: content.url,
+            earliest_release: content.earliest_release,
+            latest_release: content.latest_release,
+            count: content.entries.length;
+        }
         console.log(name);
-        console.log(content);
+        console.log(output);
     }
 }
