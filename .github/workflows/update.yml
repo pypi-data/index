@@ -2,6 +2,8 @@ name: Update Index
 on:
   workflow_dispatch:
   push:
+  schedule:
+    - cron: '0 0 * * *'
 
 concurrency: ci-index-${{ github.ref }}
 
