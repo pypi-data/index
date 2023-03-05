@@ -1,4 +1,4 @@
-module.exports = async ({github, context}) => {
+module.exports = async ({github, fetch}) => {
     let response = await github.rest.repos.listForOrg({
         org: "pypi-data",
         sort: "full_name",
@@ -9,14 +9,12 @@ module.exports = async ({github, context}) => {
     let indexes = [];
     for (const idx in repo_names) {
         let name = repo_names[idx];
-        let content = await github.rest.repos.getContent({
+        let response = await github.rest.repos.getContent({
             owner: "pypi-data",
             repo: name,
             path: "index.json",
-            mediaType: {
-        format: "raw"
-    }
         });
+        let content = fetch(response.data.download_url);
         console.log(name);
         console.log(content);
     }
