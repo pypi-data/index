@@ -9,12 +9,13 @@ module.exports = async ({github, fetch}) => {
     let indexes = [];
     for (const idx in repo_names) {
         let name = repo_names[idx];
-        let response = await github.rest.repos.getContent({
+        let api_response = await github.rest.repos.getContent({
             owner: "pypi-data",
             repo: name,
             path: "index.json",
         });
-        let content = await fetch(response.data.download_url);
+        let response = await fetch(api_response.data.download_url);
+        let content = await response.json();
         console.log(name);
         console.log(content);
     }
