@@ -1,6 +1,8 @@
 module.exports = async ({github, context}) => {
-    return await github.rest.repos.listForOrg({
+    let response = await github.rest.repos.listForOrg({
         org: "pypi-data",
         sort: "full_name",
     });
+
+    return response.data.map(r => r.full_name)
 }
