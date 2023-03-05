@@ -17,7 +17,7 @@ module.exports = async ({github, fetch}) => {
         let response = await fetch(api_response.data.download_url);
         let content = await response.json();
         console.log(name);
-        console.log(content);
+        // console.log(content);
         let output = {
             url: content.url,
             earliest_release: content.earliest_release,
