@@ -12,7 +12,10 @@ module.exports = async ({github, context}) => {
         let content = await github.rest.repos.getContent({
             owner: "pypi-data",
             repo: name,
-            path: "index.json"
+            path: "index.json",
+            mediaType: {
+        format: "raw"
+    }
         });
         console.log(name);
         console.log(content);
