@@ -14,7 +14,7 @@ module.exports = async ({github, fetch}) => {
             repo: name,
             path: "index.json",
         });
-        let content = fetch(response.data.download_url);
+        let content = await fetch(response.data.download_url);
         console.log(name);
         console.log(content);
     }
