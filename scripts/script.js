@@ -4,21 +4,16 @@ module.exports = async ({github, fetch}) => {
     const opts = github.rest.repos.listForOrg.endpoint.merge({
         org: "pypi-data",
         sort: "full_name",
+        per_page: 100
     })
     let response = await github.paginate(opts);
     console.log(response);
 
-    let repo_names = response.map(r => r.full_name).filter(name => name.startsWith("pypi-data/pypi-code-")).map(name => name.split('/')[1]);
+    let repo_names = response.map(r => r.full_name).filter(name => name.startsWith("pypi-data/pypi-code-"));
 
-    let indexes = [];
     for (const idx in repo_names) {
         let name = repo_names[idx];
-        let api_response = await github.rest.repos.getContent({
-            owner: "pypi-data",
-            repo: name,
-            path: "index.json",
-        });
-        let response = await fetch(api_response.data.download_url);
+        let response = await fetch(`https://raw.githubusercontent.com/${name}/main/index.json`);
         let content = await response.json();
         console.log(name);
         // console.log(content);
