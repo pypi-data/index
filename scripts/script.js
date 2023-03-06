@@ -1,12 +1,14 @@
 const fs = require('fs');
 
 module.exports = async ({github, fetch}) => {
-    let response = await github.paginate(github.rest.repos.listForOrg, {
+    const opts = github.rest.repos.listForOrg.endpoint.merge({
         org: "pypi-data",
         sort: "full_name",
-    });
+    })
+    let response = await github.paginate(opts);
+    console.log(response);
 
-    let repo_names = response.data.map(r => r.full_name).filter(name => name.startsWith("pypi-data/pypi-code-")).map(name => name.split('/')[1]);
+    let repo_names = response.map(r => r.full_name).filter(name => name.startsWith("pypi-data/pypi-code-")).map(name => name.split('/')[1]);
 
     let indexes = [];
     for (const idx in repo_names) {
