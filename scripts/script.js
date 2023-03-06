@@ -23,7 +23,8 @@ module.exports = async ({github, fetch}) => {
             latest_release: content.latest_release,
             count
         }
-        fs.writeFileSync(`partitions/${name}.json`, JSON.stringify(output));
+        let short_name = name.split('/')[1]
+        fs.writeFileSync(`partitions/${short_name}.json`, JSON.stringify(output));
         console.log(output);
     }
 }
