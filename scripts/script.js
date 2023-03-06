@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 module.exports = async ({github, fetch}) => {
-    let response = await github.rest.repos.listForOrg({
+    let response = await github.paginate(github.rest.repos.listForOrg, {
         org: "pypi-data",
         sort: "full_name",
     });
