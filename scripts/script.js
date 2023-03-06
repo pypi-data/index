@@ -7,7 +7,6 @@ module.exports = async ({github, fetch}) => {
         per_page: 100
     })
     let response = await github.paginate(opts);
-    console.log(response);
 
     let repo_names = response.map(r => r.full_name).filter(name => name.startsWith("pypi-data/pypi-code-"));
 
